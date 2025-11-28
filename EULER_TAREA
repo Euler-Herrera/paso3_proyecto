@@ -1,0 +1,118 @@
+
+import os
+os.system("cls")
+
+#PRIMERO MODIFICARE UN POCO LO QUE HIZO EL PROFESOR PARA TRATAR DE ENTENDERLO YO
+# Y QUE ME SEA MAS COMODO A LA VISTA.
+
+#LISTAS
+productos = []
+
+#FUNCIONES
+
+def limpiar_pantalla():
+    os.system("cls")
+
+
+def agregar_producto(nombre):
+    productos.append(nombre)
+    print("Producto agregado correctamente")
+
+
+
+def eliminar_producto(nombre):
+    if nombre in productos:
+        productos.remove(nombre)
+        print("Producto eliminado")
+    else:
+        print("Producto no encontrado")
+
+def buscar_producto():
+    pass
+
+
+def obtener_opcion():
+    opcion = input("Seleccione la opción: ")
+    return opcion
+    
+def mostrar_menu():
+    print("""
+MENU PRINCIPAL
+--------------
+1. Agregar producto.
+2. Buscar producto.
+3. Eliminar producto.
+4. Salir.
+          
+""")
+
+    
+def obtener_datos_producto(productos):
+    limpiar_pantalla()
+    print("MENU OBTENER DATOS DE PRODUCTO")
+    print("------------------------------")
+    print(f"Los productos actuales son: {productos}")
+    while True:
+        nombre = input("Nombre: ")
+
+        if len(productos) == 0:
+            break
+        
+        # Hasta aquí llegamos y hay que revisar (comentario del profe)
+        # PRINCIPIO PARA REVISAR 
+        for producto in productos: #validación para producto repetido
+            if nombre == producto[0]:
+                input("El nombre no puede estar repetido")
+            else:
+                break
+        # TERMINO DE LO QUE HAY QUE REVISAR 
+        
+    while True:
+        print("Seleccione una de las categorias")
+        categoria = input('categorías: ("Electrónica", "Muebles" o "Ropa"): ')
+        if categoria in ["Electrónica", "Muebles",  "Ropa"]:
+            break
+        else:
+            input("(01) ERROR Categoría incorrecta")
+            
+    while True:
+        try:
+            cantidad_disponible = int(input("Cantidad: "))
+            break
+        except:
+            input("(02) DEBE INGRESAR UN NUMERO ENTERO ")
+   
+    return nombre, categoria, cantidad_disponible
+
+
+#POR AQUI SE INICIA EL BLOQUE PRINCIPAL
+while True:
+    limpiar_pantalla()
+    mostrar_menu()
+    opcion = obtener_opcion()
+    if opcion == "1":
+        nombre, categoria, cantidad_disponible = obtener_datos_producto(productos)
+        productos.append([nombre, categoria, cantidad_disponible])
+        input(f"Los productos son: {productos}")
+
+    # BUSCAR PRODUCTO 
+    elif opcion == "2": 
+        busca_prod = input("Escriba el producto: ")
+        buscar_producto(busca_prod)
+
+
+    # ELIMINAR PRODUCTO
+    elif opcion == "3":
+        eliminar_producto()
+
+
+
+    elif opcion == "4":
+        input("Has seleccionado la opción de salir << PRESIONA ENTER >>")
+        break
+
+
+    else:
+        input("Opción inválida <Presione ENTER>")
+        
+print("\n¡FIN DEL PROGRAMA! Que tengas buen dia 😎")
